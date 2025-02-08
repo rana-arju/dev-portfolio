@@ -12,7 +12,7 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1200px",
       },
     },
 
@@ -29,8 +29,8 @@ const config = {
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "#f9004d",
+          foreground: "#FFFFFF",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -64,6 +64,29 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        typing: {
+          "0%": {
+            width: "0%",
+            visibility: "hidden"
+          },
+          "100%": {
+            width: "100%"
+          }  
+        },
+        blink: {
+          "50%": {
+            borderColor: "transparent"
+          },
+          "100%": {
+            borderColor: "white"
+          }  
+        }
+      },
+      animation: {
+        typing: "typing 2s steps(20) infinite alternate, blink .7s infinite"
+      }
+    
     },
   },
   plugins: [import("tailwindcss-animate")],

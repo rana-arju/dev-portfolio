@@ -2,13 +2,21 @@
 
 import Link from "next/link";
 //import { useSession } from "next-auth/react";
-import { Home, Info, LogIn, UserPlus, User, Droplet } from "lucide-react";
+import {
+  Home,
+  Info,
+  LogIn,
+  User,
+  Code2,
+  NotebookPen,
+  Contact,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function BottomNavbar() {
   //const { data: session } = useSession();
-  const [session] = useState(false)
+  const [session] = useState(false);
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
@@ -29,6 +37,28 @@ export default function BottomNavbar() {
         </li>
         <li>
           <Link
+            href="/projects"
+            className={`flex flex-col items-center ${
+              isActive("/projects") ? "text-primary" : "text-gray-500"
+            }`}
+          >
+            <Code2 size={24} />
+            <span className="text-xs">Project</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/blog"
+            className={`flex flex-col items-center ${
+              isActive("/blog") ? "text-primary" : "text-gray-500"
+            }`}
+          >
+            <NotebookPen size={24} />
+            <span className="text-xs">Blog</span>
+          </Link>
+        </li>{" "}
+        <li>
+          <Link
             href="/about"
             className={`flex flex-col items-center ${
               isActive("/about") ? "text-primary" : "text-gray-500"
@@ -36,6 +66,17 @@ export default function BottomNavbar() {
           >
             <Info size={24} />
             <span className="text-xs">About</span>
+          </Link>
+        </li>{" "}
+        <li>
+          <Link
+            href="/contact"
+            className={`flex flex-col items-center ${
+              isActive("/contact") ? "text-primary" : "text-gray-500"
+            }`}
+          >
+            <Contact size={24} />
+            <span className="text-xs">Contact</span>
           </Link>
         </li>
         {session ? (
@@ -51,17 +92,6 @@ export default function BottomNavbar() {
                 <span className="text-xs">Dashboard</span>
               </Link>
             </li>
-            <li>
-              <Link
-                href="/blood-request"
-                className={`flex flex-col items-center ${
-                  isActive("/blood-request") ? "text-primary" : "text-gray-500"
-                }`}
-              >
-                <Droplet size={24} />
-                <span className="text-xs">Request</span>
-              </Link>
-            </li>
           </>
         ) : (
           <>
@@ -74,17 +104,6 @@ export default function BottomNavbar() {
               >
                 <LogIn size={24} />
                 <span className="text-xs">Sign In</span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/auth/signup"
-                className={`flex flex-col items-center ${
-                  isActive("/auth/signup") ? "text-primary" : "text-gray-500"
-                }`}
-              >
-                <UserPlus size={24} />
-                <span className="text-xs">Sign Up</span>
               </Link>
             </li>
           </>
