@@ -1,8 +1,11 @@
+import AboutSection from '@/components/AboutSection'
 import React from 'react'
 
 const About = () => {
   return (
-    <div className='mt-20'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi velit culpa laborum. Reiciendis, natus sequi. Harum labore unde quibusdam porro.</div>
+    <div className='mt-24'>
+      <AboutSection page="page" />
+    </div>
   )
 }
 
