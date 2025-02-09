@@ -11,8 +11,8 @@ export default function Hero() {
           <h1 className="text-2xl font-bold tracking-tighter sm:text-5xl md:text-3xl lg:text-5xl  ">
             Mohammad Rana Arju
           </h1>
-          <div className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed flex gap-4">
-            <p>I&apos;m a </p>
+          <div className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed flex gap-2">
+            <p>I&apos;m a</p>
             <span className="text-primary">{<Typewriter />}</span>
           </div>
           <div className="flex gap-5">

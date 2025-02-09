@@ -4,7 +4,7 @@ import Blogs from "@/components/Blogs";
 
 export default function BlogPage() {
   return (
-    <main className="pt-24">
+    <main >
       <Blogs blogPosts={blogPosts} />
     </main>
   );

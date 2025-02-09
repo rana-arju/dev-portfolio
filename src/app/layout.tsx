@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "./globals.css";
+import FooterSection from "@/components/Footer";
 const roboto = Roboto({
   weight: "400",
   subsets: ["latin"],
@@ -26,7 +27,8 @@ export default function RootLayout({
       <body className={roboto.className}>
         <Header />
         <div>{children}</div>
-      <BottomNavbar />
+        <BottomNavbar />
+        <FooterSection />
       </body>
     </html>
   );
