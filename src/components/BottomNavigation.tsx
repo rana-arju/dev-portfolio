@@ -2,21 +2,11 @@
 
 import Link from "next/link";
 //import { useSession } from "next-auth/react";
-import {
-  Home,
-  Info,
-  LogIn,
-  User,
-  Code2,
-  NotebookPen,
-  Contact,
-} from "lucide-react";
+import { Home, Info, Code2, NotebookPen, Contact } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
 
 export default function BottomNavbar() {
   //const { data: session } = useSession();
-  const [session] = useState(false);
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
@@ -79,35 +69,6 @@ export default function BottomNavbar() {
             <span className="text-xs">Contact</span>
           </Link>
         </li>
-        {session ? (
-          <>
-            <li>
-              <Link
-                href="/dashboard"
-                className={`flex flex-col items-center ${
-                  isActive("/dashboard") ? "text-primary" : "text-gray-500"
-                }`}
-              >
-                <User size={24} />
-                <span className="text-xs">Dashboard</span>
-              </Link>
-            </li>
-          </>
-        ) : (
-          <>
-            <li>
-              <Link
-                href="/auth/signin"
-                className={`flex flex-col items-center ${
-                  isActive("/auth/signin") ? "text-primary" : "text-gray-500"
-                }`}
-              >
-                <LogIn size={24} />
-                <span className="text-xs">Sign In</span>
-              </Link>
-            </li>
-          </>
-        )}
       </ul>
     </nav>
   );

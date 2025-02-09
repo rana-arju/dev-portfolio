@@ -1,46 +1,74 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Header() {
-    const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const pathname = usePathname();
 
-    useEffect(() => {
-      const checkMobile = () => {
-        setIsMobile(window.innerWidth < 768);
-      };
-      checkMobile();
-      window.addEventListener("resize", checkMobile);
-      return () => window.removeEventListener("resize", checkMobile);
-    }, []);
+  const isActive = (path: string) => pathname === path;
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
   const NavItems = () => (
     <>
       <li>
-        <Link href="/" className="hover:text-primary">
+        <Link
+          href="/"
+          className={`hover:text-primary ${
+            isActive("/") ? "text-primary" : "text-gray-500"
+          }`}
+        >
           Home
         </Link>
       </li>
       <li>
-        <Link href="/projects" className="hover:text-primary">
+        <Link
+          href="/projects"
+          className={`hover:text-primary ${
+            isActive("/projects") ? "text-primary" : "text-gray-500"
+          }`}
+        >
           Projects
         </Link>
       </li>
       <li>
-        <Link href="/blog" className="hover:text-primary">
+        <Link
+          href="/blog"
+          className={`hover:text-primary ${
+            isActive("/blog") ? "text-primary" : "text-gray-500"
+          }`}
+        >
           Blogs
         </Link>
       </li>
       <li>
-        <Link href="/about" className="hover:text-primary">
+        <Link
+          href="/about"
+          className={`hover:text-primary ${
+            isActive("/about") ? "text-primary" : "text-gray-500"
+          }`}
+        >
           About
         </Link>
       </li>
       <li>
-        <Link href="/contact" className="hover:text-primary">
+        <Link
+          href="/contact"
+          className={`hover:text-primary ${
+            isActive("/contact") ? "text-primary" : "text-gray-500"
+          }`}
+        >
           Contact
         </Link>
-      </li>      
+      </li>
     </>
   );
 
