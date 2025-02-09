@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: any) {
   const projectId = await params;
   const project = projects.find((p) => p._id === projectId.id);
   return {
-    title: project?.name || "Project Not Found",
+    title: project?.title || "Project Not Found",
     description: project?.description || "No description available.",
   };
 }

@@ -91,7 +91,12 @@ export default function Header() {
 
         <ul className="flex space-x-4">
           <li>
-            <Link href="/auth/signin" className="hover:text-primary">
+            <Link
+              href="/auth/signin"
+              className={`hover:text-primary ${
+                isActive("/auth/signin") ? "text-primary" : "text-gray-500"
+              }`}
+            >
               Sign in
             </Link>
           </li>

@@ -11,7 +11,7 @@ export default function Home() {
       <Hero />
       <AboutSection page="" />
       <Skills />
-      <Projects  projects={projects} />
+      <Projects projects={projects} />
       <BlogPage />
     </div>
   );

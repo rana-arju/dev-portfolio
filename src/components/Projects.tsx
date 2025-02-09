@@ -38,7 +38,7 @@ export function Projects({ projects }: ProjectsProps) {
                 <div className="relative h-48 overflow-hidden group">
                   <Image
                     src={project.images[0] || "/placeholder.svg"}
-                    alt={project.name}
+                    alt={project.title}
                     width={400}
                     height={600}
                     className="object-cover w-full h-[200%] transition-transform duration-[4s] ease-in-out group-hover:translate-y-[-50%]"
@@ -47,7 +47,7 @@ export function Projects({ projects }: ProjectsProps) {
               </CardHeader>
               <CardContent className="flex-grow p-4">
                 <CardTitle className="mb-2 text-gray-800 dark:text-gray-100">
-                  {project.name}
+                  {project.title}
                 </CardTitle>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {project.technologies.slice(0, 3).map((tech, index) => (

@@ -23,7 +23,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
       <Card className="overflow-hidden border-2 border-gray-200 dark:border-gray-700">
         <CardHeader className="bg-gray-100 dark:bg-gray-800">
           <CardTitle className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
-            {project.name}
+            {project.title}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6">
@@ -49,7 +49,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
               <SwiperSlide key={index}>
                 <Image
                   src={image || "/placeholder.svg"}
-                  alt={`${project.name} screenshot ${index + 1}`}
+                  alt={`${project.title} screenshot ${index + 1}`}
                   width={800}
                   height={500}
                   className="rounded-lg object-cover w-full h-[400px]"

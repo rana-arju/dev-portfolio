@@ -1,6 +1,6 @@
 export interface Project {
   _id: string;
-  name: string;
+  title: string;
   images: string[];
   description: string;
   server: string;

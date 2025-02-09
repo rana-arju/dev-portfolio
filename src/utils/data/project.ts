@@ -3,7 +3,7 @@ import { Project } from "@/type/projectTypes";
 export const projects: Project[] = [
   {
     _id: "1",
-    name: "E-commerce Platform",
+    title: "E-commerce Platform",
     images: [
       "https://res.cloudinary.com/db8l1ulfq/image/upload/v1739093735/blood_donation_2_cyoxyp.png",
       "https://res.cloudinary.com/db8l1ulfq/image/upload/v1739093740/blood_donation_3_jcevtx.png",
@@ -18,7 +18,7 @@ export const projects: Project[] = [
   },
   {
     _id: "2",
-    name: "E-commerce Platform",
+    title: "E-commerce Platform",
     images: [
       "https://res.cloudinary.com/db8l1ulfq/image/upload/v1739093735/blood_donation_2_cyoxyp.png",
       "https://res.cloudinary.com/db8l1ulfq/image/upload/v1739093740/blood_donation_3_jcevtx.png",
@@ -33,7 +33,7 @@ export const projects: Project[] = [
   },
   {
     _id: "3",
-    name: "E-commerce Platform",
+    title: "E-commerce Platform",
     images: [
       "https://res.cloudinary.com/db8l1ulfq/image/upload/v1739093735/blood_donation_2_cyoxyp.png",
       "https://res.cloudinary.com/db8l1ulfq/image/upload/v1739093740/blood_donation_3_jcevtx.png",
@@ -46,6 +46,4 @@ export const projects: Project[] = [
     frontend: "https://github.com/username/ecommerce-frontend",
     live: "https://ecommerce-example.com",
   },
-  
- 
 ];
