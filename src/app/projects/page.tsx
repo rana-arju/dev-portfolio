@@ -1,9 +1,14 @@
+import { Projects } from '@/components/Projects';
+import { projects } from '@/utils/data/project';
 import React from 'react'
 
-const Projects = () => {
+const ProjectPage = () => {
   return (
-    <div>Projects</div>
-  )
+    <main>
+      {" "}
+      <Projects projects={projects} />
+    </main>
+  );
 }
 
-export default Projects
+export default ProjectPage

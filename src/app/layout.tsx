@@ -3,7 +3,10 @@ import {  Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Navbar";
 import BottomNavbar from "@/components/BottomNavigation";
-
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "./globals.css";
 const roboto = Roboto({
   weight: "400",
   subsets: ["latin"],
