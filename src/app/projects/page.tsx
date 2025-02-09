@@ -4,7 +4,7 @@ import React from 'react'
 
 const ProjectPage = () => {
   return (
-    <main>
+    <main className='pt-10'>
       {" "}
       <Projects projects={projects} />
     </main>

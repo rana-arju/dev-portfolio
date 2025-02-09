@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Github, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Autoplay,  Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -19,7 +19,7 @@ interface ProjectDetailsProps {
 
 export function ProjectDetails({ project }: ProjectDetailsProps) {
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 py-16 mt-8">
       <Card className="overflow-hidden border-2 border-gray-200 dark:border-gray-700">
         <CardHeader className="bg-gray-100 dark:bg-gray-800">
           <CardTitle className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
@@ -28,12 +28,22 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
         </CardHeader>
         <CardContent className="p-6">
           <Swiper
-            modules={[Navigation, Pagination]}
+            modules={[Autoplay, Pagination]}
             spaceBetween={30}
             slidesPerView={1}
-            navigation
+            autoplay={{
+              delay: 2000,
+              disableOnInteraction: false,
+            }}
+            loop={true}
             pagination={{ clickable: true }}
             className="mb-6"
+            style={
+              {
+                "--swiper-navigation-color": "#f9004d",
+                "--swiper-pagination-color": "#f9004d",
+              } as React.CSSProperties
+            }
           >
             {project.images.map((image, index) => (
               <SwiperSlide key={index}>
@@ -41,7 +51,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
                   src={image || "/placeholder.svg"}
                   alt={`${project.name} screenshot ${index + 1}`}
                   width={800}
-                  height={600}
+                  height={500}
                   className="rounded-lg object-cover w-full h-[400px]"
                 />
               </SwiperSlide>
@@ -103,11 +113,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
                 "dark:bg-[#ff3366] dark:hover:bg-[#e62e5c] dark:text-white"
               )}
             >
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={project.live} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="mr-2 h-4 w-4" />
                 Live Project
               </a>

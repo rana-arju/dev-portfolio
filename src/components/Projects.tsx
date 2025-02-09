@@ -13,11 +13,13 @@ import { Github, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Project } from "@/type/projectTypes";
 
+
 interface ProjectsProps {
   projects: Project[];
 }
 
 export function Projects({ projects }: ProjectsProps) {
+
   return (
     <section className="py-12 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">

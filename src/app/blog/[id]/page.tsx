@@ -1,9 +1,72 @@
-import React from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
+import { blogPosts } from "@/utils/data/blogPosts";
 
-const SingleBlog = () => {
-  return (
-    <div>SingleBlog</div>
-  )
+
+export async function generateMetadata({ params }: any) {
+  const blogId = await params;
+
+  const post = blogPosts.find((p) => p.id === blogId.id);
+  return {
+    title: post?.title || "No project found",
+    description: post?.content || "No content found",
+  };
 }
+export default async function BlogPost({ params }: any) {
+  const blogId = await params;
 
-export default SingleBlog
+  const post = blogPosts.find((p) => p.id === blogId.id);
+
+  if (!post) {
+    notFound();
+  }
+
+  return (
+    <article className="container mx-auto px-4 py-2">
+      <Button asChild variant="ghost" className="mb-6">
+        <Link href="/blog">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Blog
+        </Link>
+      </Button>
+      <Image
+        src={post.image || "/placeholder.svg"}
+        alt={post.title}
+        width={1200}
+        height={600}
+        className="w-full h-[400px] object-cover rounded-lg mb-8"
+      />
+      <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-gray-100">
+        {post.title}
+      </h1>
+      <div className="flex flex-wrap items-center gap-4 mb-6 text-sm text-gray-600 dark:text-gray-300">
+        <span>{post.author}</span>
+        <span>{post.date}</span>
+        <span>{post.readTime}</span>
+      </div>
+      <div className="flex flex-wrap gap-2 mb-8">
+        {post.tags.map((tag) => (
+          <Badge
+            key={tag}
+            variant="secondary"
+            className="bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+          >
+            {tag}
+          </Badge>
+        ))}
+      </div>
+      <div className="prose dark:prose-invert max-w-none">
+        {post.content.split("\n").map((paragraph, index) => (
+          <p key={index} className="mb-4">
+            {paragraph}
+          </p>
+        ))}
+      </div>
+    </article>
+  );
+}

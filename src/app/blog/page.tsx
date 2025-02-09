@@ -1,9 +1,11 @@
-import React from 'react'
 
-const Blog = () => {
+import { blogPosts } from "@/utils/data/blogPosts";
+import Blogs from "@/components/Blogs";
+
+export default function BlogPage() {
   return (
-    <div>Blog</div>
-  )
+    <main className="pt-24">
+      <Blogs blogPosts={blogPosts} />
+    </main>
+  );
 }
-
-export default Blog
