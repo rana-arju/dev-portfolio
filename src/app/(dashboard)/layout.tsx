@@ -43,10 +43,10 @@ export default function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <div className="flex h-screen bg-gray-100 dark:bg-gray-900 w-full">
+      <div className="flex h-screen bg-gray-100 dark:bg-gray-900 w-full ">
         {/* Sidebar */}
         <Sidebar
-          className={`transition-all duration-300 ${
+          className={`transition-all duration-300  ${
             isSidebarOpen ? "w-64" : "w-0 overflow-hidden"
           }`}
         >
@@ -91,9 +91,8 @@ export default function DashboardLayout({
         </Sidebar>
 
         {/* Main Content Area */}
-        <div
-          className={`flex-1 flex flex-col transition-all duration-300 `}
-        >
+
+        <div className={`flex-1 flex flex-col transition-all duration-300 `}>
           <div>
             <SidebarTrigger
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}

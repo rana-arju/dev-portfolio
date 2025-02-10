@@ -31,7 +31,7 @@ export default function AllBlogs() {
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">All Blog Posts</h2>
         <Button asChild>
-          <Link href="/dashboard/new-blog">Create New Blog</Link>
+          <Link href="/dashboard/addBlog">Create New Blog</Link>
         </Button>
       </div>
       <Table>
