@@ -24,20 +24,28 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ImageUpload from "./ImageUpload";
+import { useState } from "react";
 
 const formSchema = z.object({
   title: z.string().min(2, "Blog title must be at least 2 characters"),
   image: z.string({
     required_error: "Enter one image url",
   }),
-  content: z.string({
-    required_error: "Blog content is required!",
-  }),
+  content: z
+    .string({
+      required_error: "Blog content is required!",
+    })
+    .min(20, "Blog title must be at least 20 characters"),
 });
 
 export default function AddBlogForm() {
   //const [date, setDate] = useState<Date>();
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
+  const handleUploadComplete = (urls: string[]) => {
+    setImageUrls(urls);
+  };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,28 +55,20 @@ export default function AddBlogForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    // Here you would typically send the form data to your API
-  }
+    const formData = {
+      ...values,
+      image: imageUrls[0],
+    };
 
-  /*
-    const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
     const response = await fetch("/api/blood-request", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId: user.id, bloodType, location }),
+      body: JSON.stringify(formData),
     });
-
-    if (response.ok) {
-      router.push("/dashboard");
-    } else {
-      // Handle error
-      console.error("Failed to submit blood request");
-    }
-  };
-  */
+    console.log(response);
+  }
 
   return (
     <Card className="w-full max-w-4xl mx-auto">
@@ -81,7 +81,7 @@ export default function AddBlogForm() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="">
               <FormField
                 control={form.control}
                 name="title"
@@ -95,31 +95,18 @@ export default function AddBlogForm() {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="image"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Image url</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter image url"
-                        {...field}
-                        value={field.value as string}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />{" "}
+
+              <ImageUpload onUploadComplete={handleUploadComplete} />
+
               <FormField
                 control={form.control}
                 name="content"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Reference (Optional)</FormLabel>
+                    <FormLabel>Blog content</FormLabel>
                     <FormControl>
                       <Textarea
+                      className="h-36"
                         placeholder="Write blog content..."
                         {...field}
                       />
@@ -131,7 +118,7 @@ export default function AddBlogForm() {
             </div>
 
             <Button type="submit" className="w-full">
-              Submit Blood Request
+              Submit Blog
             </Button>
           </form>
         </Form>

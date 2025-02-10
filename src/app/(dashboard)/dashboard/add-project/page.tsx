@@ -27,8 +27,7 @@ export default function AddProject() {
       githubUrl,
       image,
     });
-    toast( "Project Added",
-     );
+    toast("Project Added");
     router.push("/dashboard/projects");
   };
 
