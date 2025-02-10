@@ -16,11 +16,11 @@ import { Button } from "./ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const DeleteModel = ({ id }: { id: string }) => {
+const DeleteModel = ({ url }: { url: string }) => {
   const router = useRouter();
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/blog/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/v1/${url}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });

@@ -10,25 +10,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+
 import { Project } from "@/type/projectTypes";
+import DeleteModel from "@/components/DeleteModel";
 export default async function AllProjects() {
   let projects;
   try {
     const response = await fetch(`${process.env.BACKEND_URL}/project`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      cache: "no-store",
     });
 
     if (!response.ok) {
@@ -36,6 +26,8 @@ export default async function AllProjects() {
     }
 
     const result = await response.json();
+    console.log("result", result);
+
     projects = result?.data || [];
   } catch (error) {
     console.error("Error fetching projects:", error);
@@ -73,26 +65,7 @@ export default async function AllProjects() {
               <Button asChild variant="outline" size="sm">
                 <Link href={`/dashboard/projects/${project._id}`}>Edit</Link>
               </Button>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <Button variant="destructive" size="sm">
-                    Delete
-                  </Button>
-                </AlertDialogTrigger>
-                <AlertDialogContent>
-                  <AlertDialogHeader>
-                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                    <AlertDialogDescription>
-                      This action cannot be undone. This will permanently delete
-                      the project.
-                    </AlertDialogDescription>
-                  </AlertDialogHeader>
-                  <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction>Delete</AlertDialogAction>
-                  </AlertDialogFooter>
-                </AlertDialogContent>
-              </AlertDialog>
+              <DeleteModel url={`project/${project._id}`} />
             </CardFooter>
           </Card>
         ))}

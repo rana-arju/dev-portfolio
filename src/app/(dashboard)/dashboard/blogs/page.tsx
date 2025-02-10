@@ -66,7 +66,7 @@ export default async function AllBlogs() {
                   <Button asChild variant="outline" size="sm">
                     <Link href={`/dashboard/blogs/${blog._id}`}>Edit</Link>
                   </Button>
-                  <DeleteModel id={blog._id} />
+                  <DeleteModel url={`blog/${blog._id}`} />
                 </div>
               </TableCell>
             </TableRow>

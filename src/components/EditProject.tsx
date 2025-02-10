@@ -1,5 +1,4 @@
 "use client";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -27,7 +26,7 @@ import {
 import ImageUpload from "./ImageUpload";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { Project } from "@/type/projectTypes";
 
 const formSchema = z.object({
   title: z
@@ -52,22 +51,21 @@ const formSchema = z.object({
   frontend: z.string().min(1, "Field is required"),
 });
 
-export default function AddProjectForm() {
+export default function UpdateProjectForm({ project }: { project: Project }) {
   //const [date, setDate] = useState<Date>();
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
-const router = useRouter()
+  const [imageUrls, setImageUrls] = useState<string[]>(project?.images);
   const handleUploadComplete = (urls: string[]) => {
     setImageUrls(urls);
   };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      live: "",
-      description: "",
-      technologies: "",
-      server: "",
-      frontend: "",
+      title: project?.title || "",
+      live: project.live || "",
+      description: project.description || "",
+      technologies: project?.technologies?.join(", ") || "",
+      server: project.server || "",
+      frontend: project.frontend || "",
     },
   });
 
@@ -84,24 +82,28 @@ const router = useRouter()
       technologies: techArray,
     };
 
-    const response = await fetch(`http://localhost:5000/api/v1/project`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    const response = await fetch(
+      `http://localhost:5000/api/v1/project/${project._id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }
+    );
     if (response.ok) {
-      toast("New Project added successfull!");
+      toast("Project update successfull!");
       form.reset();
-      router.push("/dashboard/blogs")
     }
   }
 
   return (
     <Card className="w-full max-w-4xl mx-auto">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl text-center">Add Project</CardTitle>
+        <CardTitle className="text-2xl text-center">
+          Update/Edit Project
+        </CardTitle>
         <CardDescription className="text-center">
-          Please fill out all the required information to add new project
+          Please fill out all the required information to Update/Edit Project
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -194,7 +196,7 @@ const router = useRouter()
             </div>
 
             <Button type="submit" className="w-full">
-              Submit project
+              Update project
             </Button>
           </form>
         </Form>
