@@ -5,11 +5,11 @@ import Skills from "@/components/Skills";
 import Blogs from "@/components/Blogs";
 
 export default async function Home() {
-  let projects =[];
+  let projects = [];
   let blogPosts = [];
 
   try {
-    const response = await fetch("http://localhost:5000/api/v1/project", {
+    const response = await fetch(`${process.env.BACKEND_URL}/project`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -20,7 +20,7 @@ export default async function Home() {
     const result = await response.json();
     projects = result?.data || [];
 
-    const res = await fetch("http://localhost:5000/api/v1/blog", {
+    const res = await fetch(`${process.env.BACKEND_URL}/blog`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
@@ -29,8 +29,6 @@ export default async function Home() {
     }
     const result2 = await res.json();
     blogPosts = result2?.data;
-
-    console.log("Projects fetched successfully:", projects);
   } catch (error) {
     console.error("Error fetching projects:", error);
   }

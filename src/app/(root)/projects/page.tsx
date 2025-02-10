@@ -2,7 +2,7 @@ import { Projects } from "@/components/Projects";
 import React from "react";
 
 const ProjectPage = async () => {
-  let projects;
+  let projects = [];
   try {
     const response = await fetch(`${process.env.BACKEND_URL}/project`, {
       method: "GET",
@@ -16,7 +16,6 @@ const ProjectPage = async () => {
     const result = await response.json();
     projects = result?.data || [];
 
-    console.log("Projects fetched successfully:", projects);
   } catch (error) {
     console.error("Error fetching projects:", error);
     projects = []; // Provide a fallback value
@@ -24,7 +23,7 @@ const ProjectPage = async () => {
 
   return (
     <main className="pt-10">
-      <Projects projects={projects?.data} />
+      <Projects projects={projects} />
     </main>
   );
 };

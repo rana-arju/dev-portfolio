@@ -5,9 +5,9 @@ import type React from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Upload, X } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
+import { CircleX, CloudUpload } from "lucide-react";
 
 const CLOUD_NAME = "db8l1ulfq";
 const UPLOAD_PRESET = "portfolio";
@@ -92,12 +92,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUploadComplete }) => {
         >
           {uploading ? (
             <>
-              <Upload className="mr-2 h-4 w-4 animate-spin" />
+              <CloudUpload className="mr-2 h-4 w-4 animate-spin" />
               Uploading...
             </>
           ) : (
             <>
-              <Upload className="mr-2 h-4 w-4" />
+              <CloudUpload className="mr-2 h-4 w-4" />
               Upload
             </>
           )}
@@ -116,7 +116,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUploadComplete }) => {
                   onClick={() => removeFile(file.uid)}
                   className="text-red-500 hover:text-red-700"
                 >
-                  <X className="h-4 w-4" />
+                  <CircleX className="h-4 w-4" />
                 </Button>
               </li>
             ))}

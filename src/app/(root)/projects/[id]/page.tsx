@@ -4,7 +4,7 @@ import { ProjectDetails } from "@/components/ProjectDetails";
 
 export async function generateMetadata({ params }: any) {
   const { id } = await params;
-  const res = await fetch(`http://localhost:5000/api/v1/project/${id}`, {
+  const res = await fetch(`${process.env.BACKEND_URL}/project/${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

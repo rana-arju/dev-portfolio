@@ -56,7 +56,6 @@ export default function AddBlogForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     const formData = {
       ...values,
       image: imageUrls[0],
