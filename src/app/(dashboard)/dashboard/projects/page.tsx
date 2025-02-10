@@ -6,7 +6,7 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import {
   AlertDialog,
@@ -21,12 +21,24 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Project } from "@/type/projectTypes";
 export default async function AllProjects() {
-  const response = await fetch("http://localhost:5000/api/v1/project", {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  const data = await response.json();
-  const projects = data?.data;
+  let projects;
+  try {
+    const response = await fetch(`${process.env.BACKEND_URL}/project`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    projects = result?.data || [];
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    projects = []; // Provide a fallback value
+  }
+
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -36,7 +48,7 @@ export default async function AllProjects() {
         </Button>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project: Project) => (
+        {projects?.map((project: Project) => (
           <Card key={project._id}>
             <CardHeader>
               <CardTitle>{project.title}</CardTitle>
