@@ -1,7 +1,7 @@
 import Blogs from "@/components/Blogs";
 
 export default async function BlogPage() {
-  const response = await fetch("http://localhost:5000/api/v1/blog", {
+  const response = await fetch(`${process.env.BACKEND_URL}/blog`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

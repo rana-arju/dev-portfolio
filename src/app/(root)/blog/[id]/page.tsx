@@ -8,7 +8,7 @@ import NotFound from "@/app/not-found";
 
 export async function generateMetadata({ params }: any) {
   const { id } = await params;
-  const response = await fetch(`http://localhost:5000/api/v1/blog/${id}`, {
+  const response = await fetch(`${process.env.BACKEND_URL}/blog/${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
@@ -67,7 +67,7 @@ export default async function BlogPost({ params }: any) {
         ))}
       </div>
       <div className="prose dark:prose-invert max-w-none">
-        {post.content.split("\n").map((paragraph:any, index: number) => (
+        {post.content.split("\n").map((paragraph: any, index: number) => (
           <p key={index} className="mb-4">
             {paragraph}
           </p>

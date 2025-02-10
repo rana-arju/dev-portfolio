@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -21,7 +20,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Project } from "@/type/projectTypes";
-
 export default async function AllProjects() {
   const response = await fetch("http://localhost:5000/api/v1/project", {
     method: "GET",
@@ -29,9 +27,6 @@ export default async function AllProjects() {
   });
   const data = await response.json();
   const projects = data?.data;
-
-
-
   return (
     <div>
       <div className="flex justify-between items-center mb-4">

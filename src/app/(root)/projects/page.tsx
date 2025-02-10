@@ -2,7 +2,7 @@ import { Projects } from "@/components/Projects";
 import React from "react";
 
 const ProjectPage = async () => {
-  const response = await fetch("http://localhost:5000/api/v1/project", {
+  const response = await fetch(`${process.env.BACKEND_URL}/project`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

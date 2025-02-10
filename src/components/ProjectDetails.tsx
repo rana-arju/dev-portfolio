@@ -111,22 +111,22 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
               </Link>
             )}
             {project?.live && (
-              <Button
-                variant="default"
-                className={cn(
-                  "bg-[#f9004d] hover:bg-[#d0003f] text-white",
-                  "dark:bg-[#ff3366] dark:hover:bg-[#e62e5c] dark:text-white cursor-pointer"
-                )}
+              <Link
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Button
+                  variant="default"
+                  className={cn(
+                    "bg-[#f9004d] hover:bg-[#d0003f] text-white",
+                    "dark:bg-[#ff3366] dark:hover:bg-[#e62e5c] dark:text-white cursor-pointer"
+                  )}
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
-                </a>
-                Live Project
-              </Button>
+                  Live Project
+                </Button>
+              </Link>
             )}
           </div>
         </CardContent>
