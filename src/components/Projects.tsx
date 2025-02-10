@@ -69,48 +69,54 @@ export function Projects({ projects }: ProjectsProps) {
               </CardContent>
               <CardFooter className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800">
                 <div className="flex space-x-2">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="text-gray-600 cursor-pointer dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
-                  >
-                    <Link
-                      href={project.frontend}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                  {project?.server && (
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="text-gray-600 cursor-pointer dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
                     >
-                      <Github className="h-4 w-4" />
-                      <span className="sr-only">Server GitHub</span>
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
-                  >
-                    <Link
-                      href={project.frontend}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      <Link
+                        href={project.server}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Github className="h-4 w-4" />
+                        <span className="sr-only">Server GitHub</span>
+                      </Link>
+                    </Button>
+                  )}
+                  {project?.frontend && (
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
                     >
-                      <Github className="h-4 w-4" />
-                      <span className="sr-only">Frontend GitHub</span>
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
-                  >
-                    <Link
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      <Link
+                        href={project.frontend}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Github className="h-4 w-4" />
+                        <span className="sr-only">Frontend GitHub</span>
+                      </Link>
+                    </Button>
+                  )}
+                  {project?.live && (
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
                     >
-                      <ExternalLink className="h-4 w-4" />
-                      <span className="sr-only">Live Project</span>
-                    </Link>
-                  </Button>
+                      <Link
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                        <span className="sr-only">Live Project</span>
+                      </Link>
+                    </Button>
+                  )}
                 </div>
                 <Button
                   variant="default"

@@ -55,7 +55,8 @@ export default async function AllProjects() {
                 className="w-full h-48 object-cover rounded-md mb-4"
               />
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                {project.description}
+                {project?.description?.split(" ").slice(0, 10).join(" ") +
+                  (project?.description?.split(" ").length > 10 ? "..." : "")}
               </p>
             </CardContent>
             <CardFooter className="flex justify-between">
@@ -78,11 +79,7 @@ export default async function AllProjects() {
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction
-                      
-                    >
-                      Delete
-                    </AlertDialogAction>
+                    <AlertDialogAction>Delete</AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>

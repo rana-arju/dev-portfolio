@@ -1,29 +1,35 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import { blogPosts } from "@/utils/data/blogPosts";
-
+import NotFound from "@/app/not-found";
 
 export async function generateMetadata({ params }: any) {
-  const blogId = await params;
-
-  const post = blogPosts.find((p) => p.id === blogId.id);
+  const { id } = await params;
+  const response = await fetch(`http://localhost:5000/api/v1/blog/${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const blogPosts = await response.json();
+  const post = blogPosts?.data;
   return {
     title: post?.title || "No project found",
     description: post?.content || "No content found",
   };
 }
 export default async function BlogPost({ params }: any) {
-  const blogId = await params;
-
-  const post = blogPosts.find((p) => p.id === blogId.id);
+  const { id } = await params;
+  const response = await fetch(`http://localhost:5000/api/v1/project/${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const blogPosts = await response.json();
+  const post = blogPosts?.data;
 
   if (!post) {
-    notFound();
+    return <NotFound />;
   }
 
   return (
@@ -50,7 +56,7 @@ export default async function BlogPost({ params }: any) {
         <span>{post.readTime}</span>
       </div>
       <div className="flex flex-wrap gap-2 mb-8">
-        {post.tags.map((tag) => (
+        {post?.tags?.map((tag: any) => (
           <Badge
             key={tag}
             variant="secondary"
@@ -61,7 +67,7 @@ export default async function BlogPost({ params }: any) {
         ))}
       </div>
       <div className="prose dark:prose-invert max-w-none">
-        {post.content.split("\n").map((paragraph, index) => (
+        {post.content.split("\n").map((paragraph:any, index: number) => (
           <p key={index} className="mb-4">
             {paragraph}
           </p>

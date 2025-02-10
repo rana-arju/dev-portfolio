@@ -80,40 +80,54 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
             </div>
           </div>
           <div className="flex flex-wrap gap-4">
-            <Link href={project.server} target="_blank" rel="noopener noreferrer">
-              <Button
-                variant="outline"
-                className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] hover:border-[#f9004d] dark:hover:text-[#ff3366] dark:hover:border-[#ff3366] cursor-pointer"
+            {project?.server && (
+              <Link
+                href={project.server}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Github className="mr-2 h-4 w-4" />
-                Server
-              </Button>
-            </Link>
-            <Link
-              href={project.frontend}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="outline"
-                className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] hover:border-[#f9004d] dark:hover:text-[#ff3366] dark:hover:border-[#ff3366] cursor-pointer flex"
+                <Button
+                  variant="outline"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] hover:border-[#f9004d] dark:hover:text-[#ff3366] dark:hover:border-[#ff3366] cursor-pointer"
+                >
+                  <Github className="mr-2 h-4 w-4" />
+                  Server
+                </Button>
+              </Link>
+            )}
+            {project?.frontend && (
+              <Link
+                href={project.frontend}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Github className="mr-2 h-4 w-4" />
-                Frontend
+                <Button
+                  variant="outline"
+                  className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] hover:border-[#f9004d] dark:hover:text-[#ff3366] dark:hover:border-[#ff3366] cursor-pointer flex"
+                >
+                  <Github className="mr-2 h-4 w-4" />
+                  Frontend
+                </Button>
+              </Link>
+            )}
+            {project?.live && (
+              <Button
+                variant="default"
+                className={cn(
+                  "bg-[#f9004d] hover:bg-[#d0003f] text-white",
+                  "dark:bg-[#ff3366] dark:hover:bg-[#e62e5c] dark:text-white cursor-pointer"
+                )}
+              >
+                <a
+                  href={project.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                </a>
+                Live Project
               </Button>
-            </Link>
-            <Button
-              variant="default"
-              className={cn(
-                "bg-[#f9004d] hover:bg-[#d0003f] text-white",
-                "dark:bg-[#ff3366] dark:hover:bg-[#e62e5c] dark:text-white cursor-pointer"
-              )}
-            >
-              <a href={project.live} target="_blank" rel="noopener noreferrer">
-                <ExternalLink className="mr-2 h-4 w-4" />
-              </a>
-              Live Project
-            </Button>
+            )}
           </div>
         </CardContent>
       </Card>
