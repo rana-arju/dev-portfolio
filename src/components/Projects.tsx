@@ -13,13 +13,11 @@ import { Github, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Project } from "@/type/projectTypes";
 
-
 interface ProjectsProps {
   projects: Project[];
 }
 
 export function Projects({ projects }: ProjectsProps) {
-
   return (
     <section className="py-12 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
@@ -29,7 +27,7 @@ export function Projects({ projects }: ProjectsProps) {
           </h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
+          {projects?.map((project) => (
             <Card
               key={project._id}
               className="flex flex-col overflow-hidden border-2 border-gray-200 dark:border-gray-700 hover:border-[#f9004d] dark:hover:border-[#ff3366] transition-colors duration-300"
@@ -74,47 +72,44 @@ export function Projects({ projects }: ProjectsProps) {
                   <Button
                     variant="outline"
                     size="icon"
-                    asChild
-                    className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
+                    className="text-gray-600 cursor-pointer dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
                   >
-                    <a
-                      href={project.server}
+                    <Link
+                      href={project.frontend}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <Github className="h-4 w-4" />
                       <span className="sr-only">Server GitHub</span>
-                    </a>
+                    </Link>
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    asChild
                     className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
                   >
-                    <a
+                    <Link
                       href={project.frontend}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <Github className="h-4 w-4" />
                       <span className="sr-only">Frontend GitHub</span>
-                    </a>
+                    </Link>
                   </Button>
                   <Button
                     variant="outline"
                     size="icon"
-                    asChild
                     className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] dark:hover:text-[#ff3366]"
                   >
-                    <a
+                    <Link
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <ExternalLink className="h-4 w-4" />
                       <span className="sr-only">Live Project</span>
-                    </a>
+                    </Link>
                   </Button>
                 </div>
                 <Button

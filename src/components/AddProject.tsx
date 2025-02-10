@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/card";
 import ImageUpload from "./ImageUpload";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   title: z
@@ -81,15 +82,16 @@ export default function AddProjectForm() {
       images: imageUrls,
       technologies: techArray,
     };
-    /*
-    const response = await fetch("/api/blood-request", {
+
+    const response = await fetch("http://localhost:5000/api/v1/project", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
-    
-    */
-    console.log(formData);
+    if (response.ok) {
+      toast("New Project added successfull!");
+      form.reset();
+    }
   }
 
   return (
@@ -102,7 +104,7 @@ export default function AddProjectForm() {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)}  className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <div className="">
               <FormField
                 control={form.control}

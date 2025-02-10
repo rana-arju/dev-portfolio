@@ -1,5 +1,4 @@
 import { Blog, Message } from "@/type";
-import { Project } from "@/type/projectTypes";
 
 export const blogs: Blog[] = [
   {
@@ -18,28 +17,7 @@ export const blogs: Blog[] = [
   },
 ];
 
-export const projects: Project[] = [
-  {
-    _id: "1",
-    title: "E-commerce Platform",
-    description: "A full-stack e-commerce solution...",
-    images: ["https://example.com/ecommerce.jpg"],
-    technologies: ["React", "Node.js", "MongoDB"],
-    live: "https://ecommerce-example.com",
-    server: "https://github.com/username/ecommerce",
-    frontend: "https://github.com/username/ecommerce",
-  },
-  {
-    _id: "2",
-    title: "Task Management App",
-    description: "A collaborative task management application...",
-    images: ["https://example.com/taskapp.jpg"],
-    technologies: ["Vue.js", "Express", "PostgreSQL"],
-    live: "https://ecommerce-example.com",
-    server: "https://github.com/username/ecommerce",
-    frontend: "https://github.com/username/ecommerce",
-  },
-];
+
 
 export const messages: Message[] = [
   {

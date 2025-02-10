@@ -7,19 +7,22 @@ import { Badge } from "@/components/ui/badge";
 import { Github, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay,  Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Project } from "@/type/projectTypes";
+import Link from "next/link";
 
 interface ProjectDetailsProps {
   project: Project;
 }
 
 export function ProjectDetails({ project }: ProjectDetailsProps) {
+  console.log("project details", project.title);
+
   return (
-    <div className="container mx-auto px-4 py-16 mt-8">
+    <div className="container mx-auto px-1 sm:px-4 py-16 mt-8">
       <Card className="overflow-hidden border-2 border-gray-200 dark:border-gray-700">
         <CardHeader className="bg-gray-100 dark:bg-gray-800">
           <CardTitle className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
@@ -45,7 +48,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
               } as React.CSSProperties
             }
           >
-            {project.images.map((image, index) => (
+            {project?.images?.map((image, index) => (
               <SwiperSlide key={index}>
                 <Image
                   src={image || "/placeholder.svg"}
@@ -65,7 +68,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
               Technologies Used
             </h3>
             <div className="flex flex-wrap gap-2">
-              {project.technologies.map((tech, index) => (
+              {project?.technologies?.map((tech, index) => (
                 <Badge
                   key={index}
                   variant="secondary"
@@ -77,46 +80,39 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
             </div>
           </div>
           <div className="flex flex-wrap gap-4">
-            <Button
-              variant="outline"
-              asChild
-              className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] hover:border-[#f9004d] dark:hover:text-[#ff3366] dark:hover:border-[#ff3366]"
-            >
-              <a
-                href={project.server}
-                target="_blank"
-                rel="noopener noreferrer"
+            <Link href={project.server} target="_blank" rel="noopener noreferrer">
+              <Button
+                variant="outline"
+                className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] hover:border-[#f9004d] dark:hover:text-[#ff3366] dark:hover:border-[#ff3366] cursor-pointer"
               >
                 <Github className="mr-2 h-4 w-4" />
-                Server GitHub
-              </a>
-            </Button>
-            <Button
-              variant="outline"
-              asChild
-              className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] hover:border-[#f9004d] dark:hover:text-[#ff3366] dark:hover:border-[#ff3366]"
+                Server
+              </Button>
+            </Link>
+            <Link
+              href={project.frontend}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <a
-                href={project.frontend}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Button
+                variant="outline"
+                className="text-gray-600 dark:text-gray-300 hover:text-[#f9004d] hover:border-[#f9004d] dark:hover:text-[#ff3366] dark:hover:border-[#ff3366] cursor-pointer flex"
               >
                 <Github className="mr-2 h-4 w-4" />
-                Frontend GitHub
-              </a>
-            </Button>
+                Frontend
+              </Button>
+            </Link>
             <Button
               variant="default"
-              asChild
               className={cn(
                 "bg-[#f9004d] hover:bg-[#d0003f] text-white",
-                "dark:bg-[#ff3366] dark:hover:bg-[#e62e5c] dark:text-white"
+                "dark:bg-[#ff3366] dark:hover:bg-[#e62e5c] dark:text-white cursor-pointer"
               )}
             >
               <a href={project.live} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="mr-2 h-4 w-4" />
-                Live Project
               </a>
+              Live Project
             </Button>
           </div>
         </CardContent>

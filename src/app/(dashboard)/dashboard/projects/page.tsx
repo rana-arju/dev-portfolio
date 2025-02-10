@@ -1,6 +1,4 @@
-"use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -22,17 +20,17 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { projects as initialProjects } from "../../../../utils/data/MockData";
-import { toast } from "sonner";
+import { Project } from "@/type/projectTypes";
 
-export default function AllProjects() {
-  const [projects, setProjects] = useState(initialProjects);
+export default async function AllProjects() {
+  const response = await fetch("http://localhost:5000/api/v1/project", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await response.json();
+  const projects = data?.data;
 
-  const handleDelete = (id: string) => {
-    setProjects(projects.filter((project) => project._id !== id));
-    toast( "Project Deleted",
-   );
-  };
+
 
   return (
     <div>
@@ -43,7 +41,7 @@ export default function AllProjects() {
         </Button>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project) => (
+        {projects.map((project: Project) => (
           <Card key={project._id}>
             <CardHeader>
               <CardTitle>{project.title}</CardTitle>
@@ -80,7 +78,9 @@ export default function AllProjects() {
                   </AlertDialogHeader>
                   <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={() => handleDelete(project._id)}>
+                    <AlertDialogAction
+                      
+                    >
                       Delete
                     </AlertDialogAction>
                   </AlertDialogFooter>

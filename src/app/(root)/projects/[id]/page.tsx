@@ -1,24 +1,32 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import NotFound from "@/app/not-found";
 import { ProjectDetails } from "@/components/ProjectDetails";
-import { projects } from "@/utils/data/project";
-import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }: any) {
-  const projectId = await params;
-  const project = projects.find((p) => p._id === projectId.id);
+ const { id } = await params;
+ const res = await fetch(`http://localhost:5000/api/v1/project/${id}`, {
+   method: "GET",
+   headers: { "Content-Type": "application/json" },
+ });
+ const project = await res.json();
   return {
-    title: project?.title || "Project Not Found",
-    description: project?.description || "No description available.",
+    title: project?.data?.title || "Project Not Found",
+    description: project?.data.description || "No description available.",
   };
 }
 
 export default async function ProjectDetailsPage({ params }: any) {
-  const projectId = await params;
-  const project = projects.find((p) => p._id === projectId.id);
+  const {id} = await params;
+  const res = await fetch(`http://localhost:5000/api/v1/project/${id}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const project = await res.json();
+
 
   if (!project) {
-    notFound();
+    return <NotFound />;
   }
 
-  return <ProjectDetails project={project} />;
+  return <ProjectDetails project={project?.data} />;
 }

@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PenSquare, FolderPlus, MessageSquare } from "lucide-react";
-import { blogs, projects, messages } from "../../../utils/data/MockData";
+import { blogs, messages } from "../../../utils/data/MockData";
 
 export default function Dashboard() {
   return (
@@ -20,7 +20,7 @@ export default function Dashboard() {
           <FolderPlus className="h-4 w-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{projects.length}</div>
+          <div className="text-2xl font-bold">5</div>
         </CardContent>
       </Card>
       <Card>

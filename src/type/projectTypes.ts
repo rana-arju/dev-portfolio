@@ -7,4 +7,5 @@ export interface Project {
   frontend: string;
   live: string;
   technologies: string[];
+  deadline: string;
 }
