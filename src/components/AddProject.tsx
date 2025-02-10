@@ -27,6 +27,7 @@ import {
 import ImageUpload from "./ImageUpload";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   title: z
@@ -54,7 +55,7 @@ const formSchema = z.object({
 export default function AddProjectForm() {
   //const [date, setDate] = useState<Date>();
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-
+const router = useRouter()
   const handleUploadComplete = (urls: string[]) => {
     setImageUrls(urls);
   };
@@ -91,6 +92,7 @@ export default function AddProjectForm() {
     if (response.ok) {
       toast("New Project added successfull!");
       form.reset();
+      router.push("/dashboard/blogs")
     }
   }
 
@@ -192,7 +194,7 @@ export default function AddProjectForm() {
             </div>
 
             <Button type="submit" className="w-full">
-              Submit Blog
+              Submit project
             </Button>
           </form>
         </Form>

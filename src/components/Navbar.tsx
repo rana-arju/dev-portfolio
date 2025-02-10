@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Header() {
+  const [session] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
@@ -90,16 +91,29 @@ export default function Header() {
         )}
 
         <ul className="flex space-x-4">
-          <li>
-            <Link
-              href="/auth/signin"
-              className={`hover:text-primary ${
-                isActive("/auth/signin") ? "text-primary" : "text-gray-500"
-              }`}
-            >
-              Sign in
-            </Link>
-          </li>
+          {session ? (
+            <li>
+              <Link
+                href="/dashboard"
+                className={`hover:text-primary ${
+                  isActive("/dashboard") ? "text-primary" : "text-gray-500"
+                }`}
+              >
+                Dashboard
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link
+                href="/auth/signin"
+                className={`hover:text-primary ${
+                  isActive("/auth/signin") ? "text-primary" : "text-gray-500"
+                }`}
+              >
+                Sign in
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </header>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import moment from "moment";
 import {
   Card,
   CardContent,
@@ -22,11 +23,11 @@ export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
       {blogPosts.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogPosts?.map((post) => (
-            <Link href={`/blog/${post.id}`} key={post.id}>
+            <Link href={`/blog/${post?._id}`} key={post?._id}>
               <Card className="h-full hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                 <CardHeader className="p-0">
                   <Image
-                    src={post.image || "/placeholder.svg"}
+                    src={post.image || "/blog.webp"}
                     alt={post.title}
                     width={600}
                     height={400}
@@ -35,10 +36,11 @@ export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
                 </CardHeader>
                 <CardContent className="p-4">
                   <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">
-                    {post.title}
+                    {post.title.split(/\s+/).slice(0, 10).join(" ") + "..."}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {post.excerpt}
+                    {post?.content?.split(/\s+/)?.slice(0, 20).join(" ") +
+                      "..."}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {post?.tags?.map((tag) => (
@@ -54,8 +56,8 @@ export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
                 </CardContent>
                 <CardFooter className="p-4 bg-gray-50 dark:bg-gray-800 text-sm text-gray-600 dark:text-gray-300">
                   <div className="flex justify-between w-full">
-                    <span>{post.author}</span>
-                    <span>{post.date}</span>
+                    <span>Rana Arju</span>
+                    <span>{moment(post.createdAt).format("MMM Do YY")}</span>
                   </div>
                 </CardFooter>
               </Card>

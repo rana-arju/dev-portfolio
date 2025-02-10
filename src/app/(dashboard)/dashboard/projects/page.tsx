@@ -1,6 +1,8 @@
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+
 import {
   Card,
   CardContent,
@@ -26,6 +28,7 @@ export default async function AllProjects() {
     const response = await fetch(`${process.env.BACKEND_URL}/project`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
+      cache: "no-store",
     });
 
     if (!response.ok) {

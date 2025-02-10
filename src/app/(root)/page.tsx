@@ -12,6 +12,7 @@ export default async function Home() {
     const response = await fetch(`${process.env.BACKEND_URL}/project`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
+      next: { revalidate: 30 },
     });
 
     if (!response.ok) {
@@ -23,6 +24,7 @@ export default async function Home() {
     const res = await fetch(`${process.env.BACKEND_URL}/blog`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
+      next: { revalidate: 30 },
     });
     if (!res.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

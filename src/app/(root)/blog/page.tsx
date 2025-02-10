@@ -7,6 +7,7 @@ export default async function BlogPage() {
     const response = await fetch(`${process.env.BACKEND_URL}/blog`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
+      next: { revalidate: 30 },
     });
 
     if (!response.ok) {

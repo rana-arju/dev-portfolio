@@ -21,7 +21,8 @@ export async function generateMetadata({ params }: any) {
 }
 export default async function BlogPost({ params }: any) {
   const { id } = await params;
-  const response = await fetch(`${process.env.BACKEND_URL}/project/${id}`, {
+  
+  const response = await fetch(`${process.env.BACKEND_URL}/blog/${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

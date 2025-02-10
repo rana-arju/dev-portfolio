@@ -26,9 +26,11 @@ import {
 } from "@/components/ui/card";
 import ImageUpload from "./ImageUpload";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   title: z.string().min(2, "Blog title must be at least 2 characters"),
+  tags: z.string().min(2, "Tags is required!"),
   image: z.string({
     required_error: "Enter one image url",
   }),
@@ -42,7 +44,6 @@ const formSchema = z.object({
 export default function AddBlogForm() {
   //const [date, setDate] = useState<Date>();
   const [imageUrls, setImageUrls] = useState<string[]>([]);
-
   const handleUploadComplete = (urls: string[]) => {
     setImageUrls(urls);
   };
@@ -52,21 +53,37 @@ export default function AddBlogForm() {
       title: "",
       content: "",
       image: "",
+      tags: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const formData = {
-      ...values,
-      image: imageUrls[0],
-    };
+    const { tags, ...restValues } = values;
 
-    const response = await fetch("/api/blood-request", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    console.log(response);
+    const tagArray = tags.split(",").map((item: string) => item.trim());
+    const formData = {
+      ...restValues,
+      image: imageUrls[0],
+      tags: tagArray,
+    };
+    try {
+      const response = await fetch(
+        `https://portfolio-backend02.vercel.app/api/v1/blog`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+      if (response.ok) {
+        await response.json();
+        toast.success("New blog Create successfull");
+        form.reset();
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Someting error");
+    }
   }
 
   return (
@@ -94,7 +111,19 @@ export default function AddBlogForm() {
                   </FormItem>
                 )}
               />
-
+              <FormField
+                control={form.control}
+                name="tags"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel> Tags (comma-separated)</FormLabel>
+                    <FormControl>
+                      <Input placeholder="javascript, React js" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <ImageUpload onUploadComplete={handleUploadComplete} />
 
               <FormField
@@ -105,7 +134,7 @@ export default function AddBlogForm() {
                     <FormLabel>Blog content</FormLabel>
                     <FormControl>
                       <Textarea
-                      className="h-36"
+                        className="h-36"
                         placeholder="Write blog content..."
                         {...field}
                       />

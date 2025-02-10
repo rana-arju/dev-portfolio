@@ -4,6 +4,7 @@ import { ProjectDetails } from "@/components/ProjectDetails";
 
 export async function generateMetadata({ params }: any) {
   const { id } = await params;
+
   const res = await fetch(`${process.env.BACKEND_URL}/project/${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },

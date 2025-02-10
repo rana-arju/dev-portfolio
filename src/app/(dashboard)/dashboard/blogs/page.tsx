@@ -1,31 +1,39 @@
-"use client"
-
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+export const dynamic = "force-dynamic";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { blogs as initialBlogs } from "../../../../utils/data/MockData"
-import { toast } from "sonner"
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
-export default function AllBlogs() {
-  const [blogs, setBlogs] = useState(initialBlogs)
+import { Blog } from "@/type";
+import moment from "moment";
+import DeleteModel from "@/components/DeleteModel";
 
-  const handleDelete = (id: string) => {
-    setBlogs(blogs.filter((blog) => blog._id !== id))
-    toast( "Blog Deleted")
+export default async function AllBlogs() {
+  let blogPosts = [];
+
+  try {
+    const response = await fetch(`${process.env.BACKEND_URL}/blog`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    blogPosts = result?.data || [];
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    blogPosts = []; // Provide a fallback value
   }
-
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
@@ -44,35 +52,21 @@ export default function AllBlogs() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {blogs.map((blog) => (
+          {blogPosts?.map((blog: Blog) => (
             <TableRow key={blog._id}>
-              <TableCell>{blog.title}</TableCell>
-              <TableCell>{blog.author}</TableCell>
-              <TableCell>{blog.createdAt}</TableCell>
+              <TableCell>
+                {blog?.title?.split(/\s+/).slice(0, 10).join(" ") + "..."}
+              </TableCell>
+              <TableCell>Rana Arju</TableCell>
+              <TableCell>
+                {moment(blog.createdAt).format("MMM Do YY")}
+              </TableCell>
               <TableCell>
                 <div className="flex space-x-2">
                   <Button asChild variant="outline" size="sm">
                     <Link href={`/dashboard/blogs/${blog._id}`}>Edit</Link>
                   </Button>
-                  <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <Button variant="destructive" size="sm">
-                        Delete
-                      </Button>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                        <AlertDialogDescription>
-                          This action cannot be undone. This will permanently delete the blog post.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => handleDelete(blog._id)}>Delete</AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
+                  <DeleteModel id={blog._id} />
                 </div>
               </TableCell>
             </TableRow>
@@ -80,6 +74,5 @@ export default function AllBlogs() {
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
-
