@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ModeToggle } from "./DarkMode";
 type UserProps = {
   user?: {
     name?: string | null | undefined;
@@ -28,8 +29,8 @@ export default function Header({ session }: { session: UserProps | null }) {
       <li>
         <Link
           href="/"
-          className={`hover:text-primary ${
-            isActive("/") ? "text-primary" : "text-gray-500"
+          className={`hover:text-primary  ${
+            isActive("/") ? "text-primary" : "text-gray-500 dark:text-white "
           }`}
         >
           Home
@@ -39,7 +40,9 @@ export default function Header({ session }: { session: UserProps | null }) {
         <Link
           href="/projects"
           className={`hover:text-primary ${
-            isActive("/projects") ? "text-primary" : "text-gray-500"
+            isActive("/projects")
+              ? "text-primary"
+              : "text-gray-500 dark:text-white "
           }`}
         >
           Projects
@@ -49,7 +52,9 @@ export default function Header({ session }: { session: UserProps | null }) {
         <Link
           href="/blog"
           className={`hover:text-primary ${
-            isActive("/blog") ? "text-primary" : "text-gray-500"
+            isActive("/blog")
+              ? "text-primary"
+              : "text-gray-500 dark:text-white "
           }`}
         >
           Blogs
@@ -59,7 +64,9 @@ export default function Header({ session }: { session: UserProps | null }) {
         <Link
           href="/about"
           className={`hover:text-primary ${
-            isActive("/about") ? "text-primary" : "text-gray-500"
+            isActive("/about")
+              ? "text-primary"
+              : "text-gray-500 dark:text-white "
           }`}
         >
           About
@@ -69,7 +76,9 @@ export default function Header({ session }: { session: UserProps | null }) {
         <Link
           href="/contact"
           className={`hover:text-primary ${
-            isActive("/contact") ? "text-primary" : "text-gray-500"
+            isActive("/contact")
+              ? "text-primary"
+              : "text-gray-500 dark:text-white "
           }`}
         >
           Contact
@@ -101,7 +110,9 @@ export default function Header({ session }: { session: UserProps | null }) {
               <Link
                 href="/dashboard"
                 className={`hover:text-primary ${
-                  isActive("/dashboard") ? "text-primary" : "text-gray-500"
+                  isActive("/dashboard")
+                    ? "text-primary"
+                    : "text-gray-500 dark:text-white "
                 }`}
               >
                 Dashboard
@@ -112,13 +123,18 @@ export default function Header({ session }: { session: UserProps | null }) {
               <Link
                 href="/auth/signin"
                 className={`hover:text-primary ${
-                  isActive("/auth/signin") ? "text-primary" : "text-gray-500"
+                  isActive("/auth/signin")
+                    ? "text-primary"
+                    : "text-gray-500 dark:text-white "
                 }`}
               >
                 Sign in
               </Link>
             </li>
           )}
+          <li>
+            <ModeToggle />
+          </li>
         </ul>
       </div>
     </header>

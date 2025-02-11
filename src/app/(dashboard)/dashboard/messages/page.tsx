@@ -36,14 +36,22 @@ export default async function Messages() {
                   <div className="ml-3">
                     <p className="text-sm font-bold text-gray-900 dark:text-gray-100">
                       {message.name}
-                    </p>{" "}
+                    </p>
+
                     <p className="text-sm font-medium text-gray-900 dark:text-gray-100 italic mb-2">
                       {message.email}
                     </p>
+
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       {moment(message?.createdAt).format("LLLL")}
                     </p>
+                    <hr />
                     <div className="mt-1 text-sm text-gray-700 dark:text-gray-300">
+                      <span className="text-bold text-primary">Subject:</span>{" "}
+                      {message.subject}
+                    </div>
+                    <div className="mt-1 text-sm text-gray-700 dark:text-gray-300">
+                      <span className="text-bold text-primary">Messages:</span>{" "}
                       {message.message}
                     </div>
                   </div>
