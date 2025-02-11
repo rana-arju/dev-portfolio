@@ -5,9 +5,12 @@ import moment from "moment";
 import { toast } from "sonner";
 
 export default async function Messages() {
-  const res = await fetch("http://localhost:5000/api/v1/contact", {
-    next: { revalidate: 30 },
-  });
+  const res = await fetch(
+    "https://portfolio-backend02.vercel.app/api/v1/contact",
+    {
+      next: { revalidate: 30 },
+    }
+  );
   if (!res.ok) {
     toast.error("Something went wrong!");
   }
