@@ -83,6 +83,26 @@ Success messages appear upon submission.
    ```sh
    npm run build
    ```
+ **.env**:
+
+   ```sh
+BACKEND_URL= 
+
+GITHUB_ID= 
+GITHUB_SECRET= 
+
+GOOGLE_ID= 
+GOOGLE_SECRET= 
+
+   ```
+**.env.local**:
+
+   ```sh
+BACKEND_URL=
+
+NEXTAUTH_SECRET=
+
+   ```
 
 ## File and Folder Structure
 
