@@ -50,7 +50,7 @@ Success messages appear upon submission.
 
 ## Video Explanation
 
-[![GearCycle store](https://res.cloudinary.com/db8l1ulfq/image/upload/v1739278485/Screenshot_38_mpqlbm.png)](https://youtu.be/RxKw84nNy9k?si=giK77tO-IOmqC0Ol)
+[![GearCycle store](https://res.cloudinary.com/db8l1ulfq/image/upload/v1739278485/Screenshot_38_mpqlbm.png)](https://youtu.be/dil-GmvcHLc?si=-rXV5GSED_GUGLG8)
 
 ## Instructions for Running the Application Locally
 
