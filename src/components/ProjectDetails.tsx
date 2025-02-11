@@ -23,7 +23,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
       <Card className="overflow-hidden border-2 border-gray-200 dark:border-gray-700">
         <CardHeader className="bg-gray-100 dark:bg-gray-800">
           <CardTitle className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">
-            {project.title}
+            {project?.title}
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6">
@@ -58,7 +58,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
             ))}
           </Swiper>
           <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">
-            {project.description}
+            {project?.description}
           </p>
           <div className="mb-6">
             <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">
@@ -79,7 +79,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
           <div className="flex flex-wrap gap-4">
             {project?.server && (
               <Link
-                href={project.server}
+                href={project?.server}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -108,7 +108,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
             )}
             {project?.frontend && (
               <Link
-                href={project.frontend}
+                href={project?.frontend}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -137,7 +137,7 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
             )}
             {project?.live && (
               <Link
-                href={project.live}
+                href={project?.live}
                 target="_blank"
                 rel="noopener noreferrer"
               >

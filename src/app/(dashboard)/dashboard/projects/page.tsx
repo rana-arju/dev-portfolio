@@ -25,6 +25,7 @@ export default async function AllProjects() {
     const response = await fetch(`${process.env.BACKEND_URL}/project`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
+      cache: "no-store"
     });
 
     if (!response.ok) {

@@ -27,8 +27,8 @@ export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
               <Card className="h-full hover:shadow-lg transition-shadow duration-300 overflow-hidden">
                 <CardHeader className="p-0">
                   <Image
-                    src={post.image || "/blog.webp"}
-                    alt={post.title}
+                    src={post?.image || "/blog.webp"}
+                    alt={post?.title}
                     width={600}
                     height={400}
                     className="w-full h-48 object-cover"
@@ -36,7 +36,7 @@ export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
                 </CardHeader>
                 <CardContent className="p-4">
                   <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">
-                    {post.title.split(/\s+/).slice(0, 10).join(" ") + "..."}
+                    {post?.title?.split(/\s+/).slice(0, 10).join(" ") + "..."}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
                     {post?.content?.split(/\s+/)?.slice(0, 20).join(" ") +
@@ -57,7 +57,7 @@ export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
                 <CardFooter className="p-4 bg-gray-50 dark:bg-gray-800 text-sm text-gray-600 dark:text-gray-300">
                   <div className="flex justify-between w-full">
                     <span>Rana Arju</span>
-                    <span>{moment(post.createdAt).format("MMM Do YY")}</span>
+                    <span>{moment(post?.createdAt).format("MMM Do YY")}</span>
                   </div>
                 </CardFooter>
               </Card>
