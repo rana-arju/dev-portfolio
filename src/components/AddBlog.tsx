@@ -27,6 +27,7 @@ import {
 import ImageUpload from "./ImageUpload";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   title: z.string().min(2, "Blog title must be at least 2 characters"),
@@ -47,6 +48,8 @@ export default function AddBlogForm() {
   const handleUploadComplete = (urls: string[]) => {
     setImageUrls(urls);
   };
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -79,6 +82,7 @@ export default function AddBlogForm() {
         await response.json();
         toast.success("New blog Create successfull");
         form.reset();
+        router.push("/dashboard/blogs");
       }
     } catch (error) {
       console.log(error);

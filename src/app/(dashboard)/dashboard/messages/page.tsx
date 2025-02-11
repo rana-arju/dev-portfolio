@@ -8,7 +8,7 @@ export default async function Messages() {
   const res = await fetch(
     "https://portfolio-backend02.vercel.app/api/v1/contact",
     {
-      next: { revalidate: 30 },
+      next: { revalidate: 5 },
     }
   );
   if (!res.ok) {

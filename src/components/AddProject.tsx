@@ -95,7 +95,7 @@ const router = useRouter()
     if (response.ok) {
       toast("New Project added successfull!");
       form.reset();
-      router.push("/dashboard/blogs")
+      router.push("/dashboard/projects")
     }
   }
 
