@@ -1,7 +1,9 @@
+"use client";
+
 import { motion } from "framer-motion";
+import { Briefcase, Calendar, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Briefcase, GraduationCap, MapPin, Calendar } from "lucide-react";
 import { education, experiences } from "@/utils/data/experiance";
 
 export default function Experience() {
@@ -40,7 +42,7 @@ export default function Experience() {
             animate="visible"
             className="space-y-6"
           >
-            {experiences.map((exp) => (
+            {experiences?.map((exp) => (
               <motion.div key={exp.id} variants={itemVariants}>
                 <Card className="p-6 hover:shadow-lg transition-shadow relative overflow-hidden group">
                   <div className="absolute top-0 left-0 w-1 h-full bg-[#f9004d] transform -translate-x-1 group-hover:translate-x-0 transition-transform" />
@@ -89,7 +91,22 @@ export default function Experience() {
         {/* Education Section */}
         <section>
           <div className="flex items-center gap-3 mb-8">
-            <GraduationCap className="w-6 h-6 text-[#f9004d]" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-graduation-cap w-6 h-6 text-[#f9004d]"
+            >
+              <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+              <path d="M22 10v6" />
+              <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />
+            </svg>
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
               Education
             </h2>
@@ -100,7 +117,7 @@ export default function Experience() {
             animate="visible"
             className="space-y-6"
           >
-            {education.map((edu) => (
+            {education?.map((edu) => (
               <motion.div key={edu.id} variants={itemVariants}>
                 <Card className="p-6 hover:shadow-lg transition-shadow relative overflow-hidden group">
                   <div className="absolute top-0 left-0 w-1 h-full bg-[#f9004d] transform -translate-x-1 group-hover:translate-x-0 transition-transform" />
