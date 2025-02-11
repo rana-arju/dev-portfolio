@@ -12,7 +12,7 @@ const ProjectPage = async () => {
     const response = await fetch(`${process.env.BACKEND_URL}/project`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      next: { revalidate: 30 },
+      next: { revalidate: 20 },
     });
 
     if (!response.ok) {

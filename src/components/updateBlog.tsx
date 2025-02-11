@@ -88,7 +88,7 @@ export default function UpdateBlogForm({ blog }: any) {
   return (
     <Card className="w-full max-w-4xl mx-auto">
       <CardHeader className="space-y-1">
-        <CardTitle className="text-2xl text-center">Add Blog</CardTitle>
+        <CardTitle className="text-2xl text-center">Update Blog</CardTitle>
         <CardDescription className="text-center">
           Please fill out all the required information to add new blog
         </CardDescription>
