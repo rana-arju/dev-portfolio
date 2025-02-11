@@ -5,20 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import {
-
-  MapPin,
-  Phone,
-  Mail,
-  Github,
-  Twitter,
-  Linkedin,
-} from "lucide-react";
+import { MapPin, Phone, Mail, Github, Twitter, Linkedin } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function ContactPage() {
-
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,7 +19,21 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
+
+    const response = await fetch(`http://localhost:5000/api/v1/contact`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+    if (response.ok) {
+      toast("Send message successfull!");
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    }
   };
 
   const handleChange = (
@@ -44,7 +49,7 @@ export default function ContactPage() {
     <div className="min-h-screen bg-white dark:bg-gray-950 pb-12 px-1 sm:px-2 ms:px-4 pt-24">
       <div className="flex justify-center mb-10">
         <h3 className="text-2xl font-bold border-b-2 border-primary inline-block pb-1 uppercase">
-         Contact
+          Contact
         </h3>
       </div>
       <div className="md:container mx-auto">
