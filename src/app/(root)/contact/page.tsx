@@ -41,13 +41,13 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-950 pb-12 px-4 pt-24">
+    <div className="min-h-screen bg-white dark:bg-gray-950 pb-12 px-1 sm:px-2 ms:px-4 pt-24">
       <div className="flex justify-center mb-10">
         <h3 className="text-2xl font-bold border-b-2 border-primary inline-block pb-1 uppercase">
          Contact
         </h3>
       </div>
-      <div className="container mx-auto">
+      <div className="md:container mx-auto">
         <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {/* Contact Info */}
           <Card className="p-8 dark:bg-gray-900 border-primary">

@@ -14,7 +14,7 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-import { Facebook } from "lucide-react";
+import Image from "next/image";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ export default function SignInForm() {
     });
 
     if (result?.error) {
-      console.error(result.error);
+      console?.error(result.error);
     } else {
       router.push("/dashboard");
     }
@@ -83,17 +83,27 @@ export default function SignInForm() {
             className="w-full"
             onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
           >
-           { //<Google className="mr-2" /> 
-           }
-             Sign in with Google
+            <Image
+              src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
+              width={20}
+              height={20}
+              alt="Google logo"
+            />
+            Sign in with Google
           </Button>
           <Button
             type="button"
             variant="outline"
             className="w-full"
-            onClick={() => signIn("facebook", { callbackUrl: "/dashboard" })}
+            onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
           >
-            <Facebook className="mr-2" /> Sign in with Facebook
+            <Image
+              src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+              width={20}
+              height={20}
+              alt="GitHub logo"
+            />
+            Sign in with Github
           </Button>
         </div>
       </CardContent>

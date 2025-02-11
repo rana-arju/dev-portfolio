@@ -5,7 +5,9 @@ import { toast } from "sonner";
 export default async function UpdateBlog({ params }: any) {
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:5000/api/v1/blog/${id}`);
+  const res = await fetch(
+    `https://portfolio-backend02.vercel.app/api/v1/blog/${id}`
+  );
   if (!res.ok) {
     toast.error("Something error")
   }

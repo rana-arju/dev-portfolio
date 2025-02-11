@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -26,8 +24,8 @@ export default function Experience() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-12 px-4">
-      <div className="container mx-auto max-w-5xl">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-12 px-1 sm:px-2 md:px-4">
+      <div className="sm:container mx-auto max-w-5xl">
         {/* Experience Section */}
         <section className="mb-16">
           <div className="flex items-center gap-3 mb-8">

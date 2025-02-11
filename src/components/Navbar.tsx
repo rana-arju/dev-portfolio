@@ -3,9 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
-export default function Header() {
-  const [session] = useState(true);
+type UserProps = {
+  user?: {
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+  };
+};
+export default function Header({ session }: { session: UserProps | null }) {
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
@@ -91,7 +96,7 @@ export default function Header() {
         )}
 
         <ul className="flex space-x-4">
-          {session ? (
+          {session?.user ? (
             <li>
               <Link
                 href="/dashboard"

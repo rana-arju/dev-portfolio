@@ -1,6 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { blogs, messages } from "../../../utils/data/MockData";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Dashboard - Mohammad Rana Arju",
+  description:
+    "I'm Mohammad Rana Arju. I'm a Jr Full Stack web developer. I love being in this line of work Because I'm passionate about technology, design, and innovation. I'm a quick learner with a self-learning attitude. I love to learn and explore new technologies and am passionate about problem-solving. I'm skilled at Next js, React js, JavaScript, Prisma, Node js, Express js, MongoDB, firebase, Github, JWT, CSS3, HTML5 and more. I am available for any kind of job opportunity that suits my skills and interests.",
+};
 export default function Dashboard() {
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

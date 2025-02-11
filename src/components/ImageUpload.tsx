@@ -45,7 +45,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onUploadComplete }) => {
 
         uploadedUrls.push(response.data.secure_url);
       } catch (error) {
-        console.error("Upload Error:", error);
+        console?.error("Upload Error:", error);
         toast("Upload Failed");
       }
     }

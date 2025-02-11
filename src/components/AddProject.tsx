@@ -84,11 +84,14 @@ const router = useRouter()
       technologies: techArray,
     };
 
-    const response = await fetch(`http://localhost:5000/api/v1/project`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
+    const response = await fetch(
+      `https://portfolio-backend02.vercel.app/api/v1/project`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      }
+    );
     if (response.ok) {
       toast("New Project added successfull!");
       form.reset();

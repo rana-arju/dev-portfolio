@@ -13,7 +13,12 @@ import {
 import { Blog } from "@/type";
 import moment from "moment";
 import DeleteModel from "@/components/DeleteModel";
-
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Blogs - Mohammad Rana Arju",
+  description:
+    "I'm Mohammad Rana Arju. I'm a Jr Full Stack web developer. I love being in this line of work Because I'm passionate about technology, design, and innovation. I'm a quick learner with a self-learning attitude. I love to learn and explore new technologies and am passionate about problem-solving. I'm skilled at Next js, React js, JavaScript, Prisma, Node js, Express js, MongoDB, firebase, Github, JWT, CSS3, HTML5 and more. I am available for any kind of job opportunity that suits my skills and interests.",
+};
 export default async function AllBlogs() {
   let blogPosts = [];
 
@@ -31,7 +36,7 @@ export default async function AllBlogs() {
     const result = await response.json();
     blogPosts = result?.data || [];
   } catch (error) {
-    console.error("Error fetching projects:", error);
+    console?.error("Error fetching projects:", error);
     blogPosts = []; // Provide a fallback value
   }
   return (

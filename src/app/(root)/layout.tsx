@@ -6,20 +6,24 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import FooterSection from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { getServerSession } from "next-auth";
 
 export const metadata: Metadata = {
   title: "Mohammad Rana Arju",
-  description: "Mohammad Rana Arju is full stack web developer",
+  description:
+    "I'm Mohammad Rana Arju. I'm a Jr Full Stack web developer. I love being in this line of work Because I'm passionate about technology, design, and innovation. I'm a quick learner with a self-learning attitude. I love to learn and explore new technologies and am passionate about problem-solving. I'm skilled at Next js, React js, JavaScript, Prisma, Node js, Express js, MongoDB, firebase, Github, JWT, CSS3, HTML5 and more. I am available for any kind of job opportunity that suits my skills and interests.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession();
+
   return (
     <div>
-      <Header />
+      <Header session={session} />
       <div>{children}</div>
       <BottomNavbar />
       <FooterSection />

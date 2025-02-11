@@ -68,7 +68,7 @@ export default function UpdateBlogForm({ blog }: any) {
     };
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/blog/${blog._id}`,
+        `https://portfolio-backend02.vercel.app/api/v1/blog/${blog._id}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },

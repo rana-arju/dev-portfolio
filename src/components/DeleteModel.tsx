@@ -20,10 +20,13 @@ const DeleteModel = ({ url }: { url: string }) => {
   const router = useRouter();
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/${url}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-      });
+      const response = await fetch(
+        `https://portfolio-backend02.vercel.app/api/v1/${url}`,
+        {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -32,7 +35,7 @@ const DeleteModel = ({ url }: { url: string }) => {
       }
       router.refresh();
     } catch (error) {
-      console.error("Error fetching projects:", error);
+      console?.error("Error fetching projects:", error);
       toast.error("Someting went wrong!");
     }
   };

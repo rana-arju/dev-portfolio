@@ -15,7 +15,7 @@ export default function Error({
 }) {
 
   useEffect(() => {
-    console.error(error);
+    console?.error(error);
   }, [error]);
 
   const containerVariants = {
