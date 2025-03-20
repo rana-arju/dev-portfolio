@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Github, Twitter, Linkedin } from "lucide-react";
+import { MapPin, Phone, Mail, Github, Linkedin, Facebook } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
 
@@ -111,9 +111,9 @@ export default function ContactPage() {
               </h3>
               <div className="flex space-x-4">
                 {[
-                  ["https://github.com", Github],
-                  ["https://twitter.com", Twitter],
-                  ["https://linkedin.com", Linkedin],
+                  ["https://github.com/rana-arju", Github],
+                  ["https://www.facebook.com/ranaarju1", Facebook],
+                  ["https://www.linkedin.com/in/rana-arju", Linkedin],
                 ].map(([link, Icon], i) => (
                   <Link
                     key={i}

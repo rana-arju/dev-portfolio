@@ -6,7 +6,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import FooterSection from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
-import { getServerSession } from "next-auth";
 
 export const metadata: Metadata = {
   title: "Mohammad Rana Arju",
@@ -19,11 +18,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession();
+
 
   return (
     <div>
-      <Header session={session} />
+      <Header />
       <div>{children}</div>
       <BottomNavbar />
       <FooterSection />

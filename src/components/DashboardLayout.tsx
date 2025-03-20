@@ -153,7 +153,7 @@ const menuItems = [
 
 export default function DashboardLayoutClient({
   children,
-  session,
+  
 }: {
   children: React.ReactNode;
   session: Session | null;
@@ -232,7 +232,7 @@ export default function DashboardLayoutClient({
 
         {/* Main Content Area */}
         <div className={`flex-1 flex flex-col transition-all duration-300 `}>
-          <Header session={session} />
+          <Header  />
           <div>
             <SidebarTrigger
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}

@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import Image from "next/image";
 import moment from "moment";
@@ -11,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { BlogPost } from "@/type/BlogPost";
 
 export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
+  // Function to strip HTML tags for preview
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -39,8 +41,9 @@ export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
                     {post?.title?.split(/\s+/).slice(0, 10).join(" ") + "..."}
                   </h2>
                   <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {post?.content?.split(/\s+/)?.slice(0, 20).join(" ") +
-                      "..."}
+                    {(post.content).split(/\s+/).length > 20
+                        ? "..."
+                        : ""}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {post?.tags?.map((tag) => (

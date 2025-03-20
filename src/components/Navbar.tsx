@@ -4,14 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ModeToggle } from "./DarkMode";
-type UserProps = {
-  user?: {
-    name?: string | null | undefined;
-    email?: string | null | undefined;
-    image?: string | null | undefined;
-  };
-};
-export default function Header({ session }: { session: UserProps | null }) {
+
+export default function Header() {
   const [isMobile, setIsMobile] = useState(false);
   const pathname = usePathname();
 
@@ -105,33 +99,7 @@ export default function Header({ session }: { session: UserProps | null }) {
         )}
 
         <ul className="flex space-x-4">
-          {session?.user ? (
-            <li>
-              <Link
-                href="/dashboard"
-                className={`hover:text-primary ${
-                  isActive("/dashboard")
-                    ? "text-primary"
-                    : "text-gray-500 dark:text-white "
-                }`}
-              >
-                Dashboard
-              </Link>
-            </li>
-          ) : (
-            <li>
-              <Link
-                href="/auth/signin"
-                className={`hover:text-primary ${
-                  isActive("/auth/signin")
-                    ? "text-primary"
-                    : "text-gray-500 dark:text-white "
-                }`}
-              >
-                Sign in
-              </Link>
-            </li>
-          )}
+      
           <li>
             <ModeToggle />
           </li>
