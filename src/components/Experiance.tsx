@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { motion } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { education, experiences } from "@/utils/data/experiance";
+import { education} from "@/utils/data/experiance";
+import { useEffect, useState } from "react";
 
 export default function Experience() {
+  const [experiences, setExperiences] = useState([]);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,7 +27,16 @@ export default function Experience() {
       opacity: 1,
     },
   };
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      const res = await fetch(`https://portfolio-backend02.vercel.app/api/v1/experiance`);
+      const data = await res.json();
+      setExperiences(data.data)
+      console.log(data);
+    }
+    fetchExperiences()
 
+  })
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 py-12 px-1 sm:px-2 md:px-4">
       <div className="sm:container mx-auto max-w-5xl">
@@ -42,8 +54,8 @@ export default function Experience() {
             animate="visible"
             className="space-y-6"
           >
-            {experiences?.map((exp) => (
-              <motion.div key={exp.id} variants={itemVariants}>
+            {experiences?.map((exp: any) => (
+              <motion.div key={exp._id} variants={itemVariants}>
                 <Card className="p-6 hover:shadow-lg transition-shadow relative overflow-hidden group">
                   <div className="absolute top-0 left-0 w-1 h-full bg-[#f9004d] transform -translate-x-1 group-hover:translate-x-0 transition-transform" />
                   <div className="flex flex-col md:flex-row md:items-center gap-4 mb-4">
@@ -65,13 +77,13 @@ export default function Experience() {
                     {exp.company}
                   </p>
                   <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 mb-4">
-                    {exp.description.map((item, index) => (
+                    {exp.description.map((item:string, index:number) => (
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
                   {exp.technologies && (
                     <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech, index) => (
+                      {exp.technologies.map((tech:string, index:number) => (
                         <Badge
                           key={index}
                           variant="secondary"

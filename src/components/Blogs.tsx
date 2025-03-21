@@ -8,11 +8,22 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
+import sanitizeHtml from "sanitize-html";
+
 import { Badge } from "@/components/ui/badge";
 import { BlogPost } from "@/type/BlogPost";
 
 export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
   // Function to strip HTML tags for preview
+const getFirstWords = (html: string, wordLimit: number) => {
+  // Remove all HTML tags to get plain text
+  const plainText = sanitizeHtml(html, { allowedTags: [] }).trim();
+
+  // Split by spaces and take the first `wordLimit` words
+  const words = plainText.split(/\s+/).slice(0, wordLimit).join(" ");
+
+  return words + (plainText.split(/\s+/).length > wordLimit ? "..." : "");
+};
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -40,11 +51,9 @@ export default function Blogs({ blogPosts }: { blogPosts: BlogPost[] }) {
                   <h2 className="text-xl font-semibold mb-2 text-gray-800 dark:text-gray-100">
                     {post?.title?.split(/\s+/).slice(0, 10).join(" ") + "..."}
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    {(post.content).split(/\s+/).length > 20
-                        ? "..."
-                        : ""}
-                  </p>
+                  <div className="prose max-w-none">
+                    <p>{getFirstWords(post.content, 20)}</p>
+                  </div>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {post?.tags?.map((tag) => (
                       <Badge

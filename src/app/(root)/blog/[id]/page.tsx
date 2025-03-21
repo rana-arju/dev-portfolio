@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import NotFound from "@/app/not-found";
-
+import sanitizeHtml from "sanitize-html";
 export async function generateMetadata({ params }: any) {
   const { id } = await params;
   const response = await fetch(`${process.env.BACKEND_URL}/blog/${id}`, {
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: any) {
 }
 export default async function BlogPost({ params }: any) {
   const { id } = await params;
-  
+
   const response = await fetch(`${process.env.BACKEND_URL}/blog/${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -32,7 +32,22 @@ export default async function BlogPost({ params }: any) {
   if (!post) {
     return <NotFound />;
   }
-
+  // Sanitize HTML to allow only safe elements from TinyMCE
+  const safeHtml = sanitizeHtml(post?.content || "", {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "iframe"]),
+    allowedAttributes: {
+      a: ["href", "target", "rel"],
+      img: ["src", "alt", "width", "height"],
+      iframe: [
+        "src",
+        "width",
+        "height",
+        "frameborder",
+        "allow",
+        "allowfullscreen",
+      ],
+    },
+  });
   return (
     <article className="container mx-auto px-4 py-2">
       <Button asChild variant="ghost" className="mb-6">
@@ -67,12 +82,15 @@ export default async function BlogPost({ params }: any) {
           </Badge>
         ))}
       </div>
-      <div className="prose dark:prose-invert max-w-none">
-        {post.content.split("\n").map((paragraph: any, index: number) => (
-          <p key={index} className="mb-4">
-            {paragraph}
-          </p>
-        ))}
+      <div className="">
+        {post?.content ? (
+          <div
+            className="prose max-w-none"
+            dangerouslySetInnerHTML={{ __html: safeHtml }}
+          />
+        ) : (
+          <p>Loading content...</p>
+        )}
       </div>
     </article>
   );

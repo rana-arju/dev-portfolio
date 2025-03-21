@@ -1,11 +1,32 @@
-// @flow strict
+"use client";
 
-import { skillsData } from "@/utils/data/skills";
+import Loading from "@/app/loading";
 import { skillsImage } from "@/utils/image-skill";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 
 function Skills() {
+  const [skillsData, setSkillsData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchSkills = async () => {
+      const res = await fetch(`http://localhost:5000/api/v1/skill`);
+      const data = await res.json();
+      if (data.data) {
+        setSkillsData(data.data[0].skills);
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        setSkillsData([]);
+      }
+    };
+    fetchSkills();
+  }, []);
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div id="skills" className="py-10 lg:py-20 bg-[#ededed] dark:bg-gray-900">
       <div className="container">

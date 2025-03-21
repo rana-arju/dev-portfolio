@@ -48,11 +48,11 @@ export function ProjectDetails({ project }: ProjectDetailsProps) {
             {project?.images?.map((image, index) => (
               <SwiperSlide key={index}>
                 <Image
-                  src={image || "/placeholder.svg"}
+                  src={image}
                   alt={`${project.title} screenshot ${index + 1}`}
                   width={800}
                   height={500}
-                  className="rounded-lg object-cover w-full h-[400px]"
+                  className="rounded-lg object-contain w-full h-[400px]"
                 />
               </SwiperSlide>
             ))}
